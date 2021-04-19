@@ -9,6 +9,60 @@ import java.util.Map;
  */
 public class LeetCodeTwoSum {
 
+    static class Solution1 {
+
+        /**
+         * Brute force approach
+         *
+         * @param nums
+         * @param target
+         * @return
+         */
+
+        public static int[] twoSum(int[] nums, int target) {
+            int[] result = new int[2];
+
+            for (int i = 0; i < nums.length; i++) {
+                for (int j = i + 1; j < nums.length; j++) {
+                    if (nums[i] + nums[j] == target) {
+                        result[0] = i;
+                        result[1] = j;
+                    }
+                }
+            }
+
+            return result;
+        }
+    }
+
+    static class Solution2 {
+
+        /**
+         * Hash approach
+         *
+         * @param nums
+         * @param target
+         * @return
+         */
+        public static int[] twoSum(int[] nums, int target) {
+
+            int[] result = new int[2];
+            Map<Integer, Integer> encounters = new HashMap<>();
+
+            for (int i = 0; i < nums.length; i++) {
+                int complement = target - nums[i];
+                if (encounters.containsKey(complement)) {
+                    result[0] = i;
+                    result[1] = encounters.get(complement);
+                } else {
+                    encounters.put(nums[i], i);
+                }
+            }
+
+            return result;
+        }
+    }
+
     public static void main(String[] args) {
         int[] nums = {2, 11, 7, 15};
         int target = 9;
@@ -22,54 +76,3 @@ public class LeetCodeTwoSum {
     }
 }
 
-class Solution1 {
-
-    /**
-     * Brute force approach
-     *
-     * @param nums
-     * @param target
-     * @return
-     */
-    public static int[] twoSum(int[] nums, int target) {
-        int[] result = new int[2];
-
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target) {
-                    result[0] = i;
-                    result[1] = j;
-                }
-            }
-        }
-
-        return result;
-    }
-}
-class Solution2 {
-
-    /**
-     * Hash approach
-     *
-     * @param nums
-     * @param target
-     * @return
-     */
-    public static int[] twoSum(int[] nums, int target) {
-
-        int[] result = new int[2];
-        Map<Integer, Integer> encounters = new HashMap<>();
-
-        for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-            if (encounters.containsKey(complement)) {
-                result[0] = i;
-                result[1] = encounters.get(complement);
-            } else {
-                encounters.put(nums[i], i);
-            }
-        }
-
-        return result;
-    }
-}
