@@ -44,8 +44,10 @@ public class LeetCodeAddTwoNumbers {
                 }
 
                 // move cursors
-                p = p.next;
-                q = q.next;
+                if (p != null)
+                    p = p.next;
+                if (q != null)
+                    q = q.next;
             }
 
             // add the last carry if any
